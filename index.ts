@@ -6,10 +6,10 @@ import { Mutex } from 'async-mutex';
 import { QueueService } from './src/usecase/queue_service';
 import { Notifier } from './src/usecase/notifier/notifier';
 import { OpenSeaFactory } from './src/infra/opensea/client_factory';
-import { OpenSeaEventStream } from './src/infra/opensea/stream';
-import { MarketEventFactory } from './src/infra/opensea/market_event_factory';
-import { NotificationFactory } from './src/adapter/notification_factory';
-import { StreamListener } from './src/adapter/stream_listener';
+import { OpenSeaEventStream } from './src/adapter/opensea/stream';
+import { MarketEventFactory } from './src/adapter/opensea/market_event_factory';
+import { NotificationFactory } from './src/usecase/listener/notification_factory';
+import { StreamListener } from './src/usecase/listener/stream_listener';
 import { TelegrafFactory } from './src/infra/telegram/factory';
 import { TelegramService } from './src/infra/telegram/telegram';
 

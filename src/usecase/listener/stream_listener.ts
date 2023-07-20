@@ -1,6 +1,6 @@
-import { MarketEvent } from '../domain/market_event';
-import { Notification } from '../usecase/notifier/notification';
-import logger from '../utils/logger';
+import { MarketEvent } from '../../domain/market_event';
+import { Notification } from '../notifier/notification';
+import logger from '../../utils/logger';
 
 interface QueueService {
     enqueue(notification: Notification): Promise<void>;

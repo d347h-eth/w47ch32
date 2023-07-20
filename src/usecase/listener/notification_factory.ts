@@ -1,6 +1,6 @@
-import { MarketEvent } from '../domain/market_event';
-import { Notification } from '../usecase/notifier/notification';
-import { TimeService } from '../utils/time';
+import { MarketEvent } from '../../domain/market_event';
+import { Notification } from '../notifier/notification';
+import { TimeService } from '../../utils/time';
 
 export class NotificationFactory {
     public constructor(private timeService: TimeService) {}
