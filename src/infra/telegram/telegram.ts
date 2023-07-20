@@ -10,7 +10,7 @@ export class TelegramService {
         this.telegraf.launch();
     }
 
-    public send(message: string): any {
+    public send(message: string): Promise<any> {
         return this.telegraf.telegram.sendMessage(this.chatId, this.trimToThreshold(message));
     }
 

@@ -13,28 +13,25 @@ export class Notification {
         public paymentTokenDecimals: number
     ) {}
 
-    public render() {
-        let quantity = this.quantity;
-        let symbol = this.paymentTokenSymbol;
-        let price = quantity + "x" + this.getFormattedPrice() + " " + symbol;
+    public render(): string {
         return [
-            '[' + this.getEventTimestamp() + ']',
-            this.collectionSlug,
-            this.type,
-            this.maker,
-            price
+            '[' + this.eventTimestamp + ']',
+            'Collection: ' + this.collectionSlug,
+            'Event: ' + this.type,
+            'Maker: ' + this.maker,
+            'Deal: ' + this.getDeal()
         ].join('\n');
     }
 
-    public getId() {
+    public getId(): string {
         return this.id;
     }
 
-    public getEventTimestamp(): string {
-        return this.eventTimestamp;
+    public getDeal(): string {
+        return this.quantity + "x" + this.getFormattedPrice() + " " + this.paymentTokenSymbol;
     }
 
-    public getFormattedPrice() {
+    public getFormattedPrice(): string {
         return formatPrice(this.unitPrice, this.paymentTokenDecimals);
     }
 }

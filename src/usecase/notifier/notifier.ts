@@ -1,12 +1,13 @@
 import { Notification } from './notification';
 import { sleep } from '../../utils/utils';
+import logger from '../../utils/logger';
 
 interface QueueService {
     consumeBatch(): Promise<Notification[]>;
 }
 
 interface PushService {
-    send(message: string): any;
+    send(message: string): Promise<any>;
 }
 
 export class Notifier {
@@ -39,10 +40,10 @@ export class Notifier {
                 let timeElapsed = timeEnd.getTime() - timeStart.getTime();
                 // send staged messages if pushTimer elapsed (otherwise wait)
                 if (timeElapsed >= pushTimer) {
-                    // await tgbot.telegram.sendMessage(chatId, trimToThreshold(stagedBatch.join('\n')));
-                    this.pushService.send(stagedBatch.map(notification => notification.render()).join('\n'));
+                    await this.pushService.send(stagedBatch.map(notification => notification.render()).join('\n'));
                     stagedBatch = [];
                     timeStart = new Date();
+                    process.exit();
                 }
             }
 

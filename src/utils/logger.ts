@@ -1,6 +1,5 @@
 import * as fs from 'fs';
 import { TimeService } from './time';
-import { inspect } from 'util';
 
 // Logger is a Singleton and needs dependencies set with setDependencies() before usage
 export class Logger {

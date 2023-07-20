@@ -4,7 +4,7 @@ export class TimeService {
         public timezone: string
     ) {}
 
-    public getLocalDateTime(timestamp?: number): string {
+    public getLocalDateTime(timestamp?: string | number | Date): string {
         if (timestamp !== undefined) {
             var date = new Date(timestamp);
         } else {

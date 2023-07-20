@@ -7,12 +7,12 @@ export class MarketEventFactory {
         'item_sold': this.newItemSoldEvent
     };
 
-    public newMarketEvent(event: any): MarketEvent {
-        let typeBuilder = this.eventTypeMapping[event.type];
+    public newMarketEvent(event: any): MarketEvent | null {
+        let typeBuilder = this.eventTypeMapping[event.event_type];
         if (typeBuilder === undefined) {
-            throw new Error('Unexpected event type: "' + event.type + '"');
+            return null;
         }
-        return typeBuilder(event);
+        return typeBuilder.bind(this, event)();
     }
 
     public newCollectionOfferEvent(event: any): MarketEvent {
@@ -35,7 +35,7 @@ export class MarketEventFactory {
 
     private makeMarketEventFromOSEvent(event: any): MarketEvent {
         return new MarketEvent(
-            event.event_timestamp,
+            event.payload.event_timestamp,
             event.event_type,
             event.payload.order_hash,
             event.payload.collection.slug,

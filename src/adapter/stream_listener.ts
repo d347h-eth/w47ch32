@@ -1,6 +1,6 @@
-import logger from '../utils/logger';
 import { MarketEvent } from '../domain/market_event';
 import { Notification } from '../usecase/notifier/notification';
+import logger from '../utils/logger';
 
 interface QueueService {
     enqueue(notification: Notification): Promise<void>;
@@ -42,20 +42,23 @@ export class StreamListener {
 
     public registerItemListed(filter: string, callback?: Function): void {
         if (callback === undefined) {
-            callback = (marketEvent: MarketEvent) => {
-                this.queueService.enqueue(this.notificationFactory.newNotification(marketEvent));
-            };
+            callback = this.callbackOnEvent();
         }
         this.eventStream.onItemListed(filter, callback);
     }
 
     public registerItemSold(filter: string, callback?: Function): void {
         if (callback === undefined) {
-            callback = (marketEvent: MarketEvent) => {
-                this.queueService.enqueue(this.notificationFactory.newNotification(marketEvent));
-            };
+            callback = this.callbackOnEvent();
         }
         this.eventStream.onItemSold(filter, callback);
+    }
+
+    // callbackOnEvent is a default handler
+    private callbackOnEvent(): Function {
+        return (marketEvent: MarketEvent) => {
+            this.queueService.enqueue(this.notificationFactory.newNotification(marketEvent));
+        };
     }
 
     private stickOffer(marketEvent: MarketEvent): boolean {

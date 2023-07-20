@@ -33,7 +33,7 @@ var marketEventFactory = new MarketEventFactory();
 var openSeaEventStream = new OpenSeaEventStream(openSeaStreamClient, marketEventFactory);
 
 // setup stream listener adapter
-var notificationFactory = new NotificationFactory();
+var notificationFactory = new NotificationFactory(timeService);
 var streamListener = new StreamListener(openSeaEventStream, queueService, notificationFactory);
 
 telegramService.launch();
