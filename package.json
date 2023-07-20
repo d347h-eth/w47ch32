@@ -1,0 +1,25 @@
+{
+  "name": "opensea-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@opensea/stream-js": "^0.1.1",
+    "api": "^6.0.0",
+    "async-mutex": "^0.4.0",
+    "dotenv": "^16.3.1",
+    "opensea-js": "^6.0.6",
+    "telegraf": "^4.12.2",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/phoenix": "^1.6.0",
+    "@types/ws": "^8.5.5",
+    "typescript": "^5.1.6"
+  }
+}
