@@ -1,3 +1,4 @@
+import { Notification } from '../../domain/notification';
 import { Telegraf } from 'telegraf';
 
 export class TelegramService {
@@ -10,8 +11,15 @@ export class TelegramService {
         this.telegraf.launch();
     }
 
-    public send(message: string): Promise<any> {
+    public sendText(message: string): Promise<any> {
         return this.telegraf.telegram.sendMessage(this.chatId, this.trimToThreshold(message));
+    }
+
+    public sendBatch(messages: Notification[]): Promise<any> {
+        return this.telegraf.telegram.sendMessage(
+            this.chatId,
+            this.trimToThreshold(messages.map(notification => notification.render()).join('\n')
+        ));
     }
 
     // trimToThreshold trims string to Telegram API max message length

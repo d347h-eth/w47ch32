@@ -37,7 +37,7 @@ var notificationFactory = new NotificationFactory(timeService);
 var streamListener = new StreamListener(openSeaEventStream, queueService, notificationFactory);
 
 telegramService.launch();
-telegramService.send(logger.makeLogMsg('57427 w47ch1n9'));
+telegramService.sendText(logger.makeLogMsg('57427 w47ch1n9'));
 
 // register stream event listeners
 // streamListener.registerCollectionOffer('*');

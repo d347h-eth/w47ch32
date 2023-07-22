@@ -1,4 +1,4 @@
-import { Notification } from './notifier/notification';
+import { Notification } from '../domain/notification';
 import logger from '../utils/logger';
 
 interface Mutex {

@@ -1,13 +1,12 @@
-import { Notification } from './notification';
+import { Notification } from '../../domain/notification';
 import { sleep } from '../../utils/utils';
-import logger from '../../utils/logger';
 
 interface QueueService {
     consumeBatch(): Promise<Notification[]>;
 }
 
 interface PushService {
-    send(message: string): Promise<any>;
+    sendBatch(messages: Notification[]): Promise<any>;
 }
 
 export class Notifier {
@@ -40,10 +39,9 @@ export class Notifier {
                 let timeElapsed = timeEnd.getTime() - timeStart.getTime();
                 // send staged messages if pushTimer elapsed (otherwise wait)
                 if (timeElapsed >= pushTimer) {
-                    await this.pushService.send(stagedBatch.map(notification => notification.render()).join('\n'));
+                    await this.pushService.sendBatch(stagedBatch);
                     stagedBatch = [];
                     timeStart = new Date();
-                    process.exit();
                 }
             }
 

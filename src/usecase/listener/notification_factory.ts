@@ -1,5 +1,5 @@
 import { MarketEvent } from '../../domain/market_event';
-import { Notification } from '../notifier/notification';
+import { Notification } from '../../domain/notification';
 import { TimeService } from '../../utils/time';
 
 export class NotificationFactory {
