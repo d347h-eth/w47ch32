@@ -1,11 +1,17 @@
 import { formatPrice } from '../utils/utils';
 
+export enum Type {
+    CollectionOffer = 'collection_offer',
+    ItemListed = 'item_listed',
+    ItemSold = 'item_sold'
+}
+
 export class MarketEvent {
     private totalPrice: number = 0;
 
     constructor(
         private createdAt: string,
-        private type: string,
+        private type: Type,
         private orderHash: string,
         private collectionSlug: string,
         private maker: string,
@@ -18,7 +24,7 @@ export class MarketEvent {
         return this.createdAt;
     }
 
-    public getType() {
+    public getType(): Type {
         return this.type;
     }
 

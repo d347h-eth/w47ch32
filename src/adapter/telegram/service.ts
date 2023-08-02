@@ -1,7 +1,7 @@
 import { Notification } from '../../domain/notification';
 import { Telegraf } from 'telegraf';
 
-export class TelegramService {
+export class Service {
     constructor(
         private telegraf: Telegraf, // hardwiring to Telegraf class here
         private chatId: string

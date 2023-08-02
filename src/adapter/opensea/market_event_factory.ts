@@ -2,9 +2,9 @@ import { MarketEvent } from '../../domain/market_event';
 
 export class MarketEventFactory {
     private eventTypeMapping: Record<string, Function> = {
-        'collection_offer': this.newCollectionOfferEvent,
-        'item_listed': this.newItemListedEvent,
-        'item_sold': this.newItemSoldEvent
+        'collection_offer': this.mapDefaultEvent,
+        'item_listed': this.mapDefaultEvent,
+        'item_sold': this.mapItemSoldEvent
     };
 
     public newMarketEvent(event: any): MarketEvent | null {
@@ -15,19 +15,13 @@ export class MarketEventFactory {
         return typeBuilder.bind(this, event)();
     }
 
-    public newCollectionOfferEvent(event: any): MarketEvent {
+    public mapDefaultEvent(event: any): MarketEvent {
         let newEvent = this.makeMarketEventFromOSEvent(event);
         newEvent.setTotalPrice(event.payload.base_price);
         return newEvent;
     }
 
-    public newItemListedEvent(event: any): MarketEvent {
-        let newEvent = this.makeMarketEventFromOSEvent(event);
-        newEvent.setTotalPrice(event.payload.base_price);
-        return newEvent;
-    }
-
-    public newItemSoldEvent(event: any): MarketEvent {
+    public mapItemSoldEvent(event: any): MarketEvent {
         let newEvent = this.makeMarketEventFromOSEvent(event);
         newEvent.setTotalPrice(event.payload.sale_price);
         return newEvent;

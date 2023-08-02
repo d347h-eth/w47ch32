@@ -30,7 +30,7 @@ export class QueueService {
         });
     };
 
-    // consumeBatch locks the shared storage and returns a new batch if it's not empty (no more than batchSize)
+    // consumeBatch locks the shared storage and returns a new batch if it's not empty (not bigger than batchSize)
     public async consumeBatch(): Promise<Notification[]> {
         var result: Notification[] = [];
         if (this.queue.length > 0) {

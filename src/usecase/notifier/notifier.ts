@@ -5,14 +5,14 @@ interface QueueService {
     consumeBatch(): Promise<Notification[]>;
 }
 
-interface PushService {
+interface NotificationService {
     sendBatch(messages: Notification[]): Promise<any>;
 }
 
 export class Notifier {
     constructor(
         private queueService: QueueService,
-        private pushService: PushService
+        private notificationService: NotificationService
     ) {}
 
     public async work(): Promise<void> {
@@ -39,9 +39,10 @@ export class Notifier {
                 let timeElapsed = timeEnd.getTime() - timeStart.getTime();
                 // send staged messages if pushTimer elapsed (otherwise wait)
                 if (timeElapsed >= pushTimer) {
-                    await this.pushService.sendBatch(stagedBatch);
+                    await this.notificationService.sendBatch(stagedBatch);
                     stagedBatch = [];
                     timeStart = new Date();
+                    process.exit();
                 }
             }
 

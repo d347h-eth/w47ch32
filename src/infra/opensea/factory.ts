@@ -2,7 +2,7 @@ import { WebSocket } from 'ws';
 import { OpenSeaStreamClient } from '@opensea/stream-js';
 import logger from '../../utils/logger';
 
-export class OpenSeaFactory {
+export class Factory {
     constructor(private accessToken: string) {}
 
     public newStreamClient(): OpenSeaStreamClient {

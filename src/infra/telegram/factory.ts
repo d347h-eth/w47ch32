@@ -2,7 +2,7 @@ import { Telegraf } from 'telegraf';
 import logger from '../../utils/logger';
 import { inspect } from 'util';
 
-export class TelegrafFactory {
+export class Factory {
     constructor(private botToken: string) {}
 
     public newClient(): Telegraf {
