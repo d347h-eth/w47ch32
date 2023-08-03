@@ -42,7 +42,6 @@ export class Notifier {
                     await this.notificationService.sendBatch(stagedBatch);
                     stagedBatch = [];
                     timeStart = new Date();
-                    process.exit();
                 }
             }
 
